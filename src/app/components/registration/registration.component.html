@@ -1,0 +1,24 @@
+<div>
+
+    <form #regForm="ngForm" (ngSubmit) = "onSubmit()" novalidate>
+        <input id="email"  #email="ngModel" name="email"  type="text" [(ngModel)]="model.email" placeholder="you@domain.com" required/>
+        <div *ngIf = "email.errors && (email.touched)">
+            <div *ngIf="email.errors.required">
+                <div [hidden]="!email.errors.required && email.dirty"> Email is required</div>
+            </div>
+            <div *ngIf="email.errors.pattern">
+                <div [hidden]="!email.errors.pattern">Email is invalide</div>
+            </div>
+        </div>
+        <input id="password"  #password="ngModel" name="password"  type="text" [(ngModel)]="model.password" placeholder="Your passowrd" required/>
+        <input id="name"  #name="ngModel" name="name"  type="text" [(ngModel)]="model.name" placeholder="Your name" required/>
+        <textarea rows="4" cols="50" id="address" name="address"  #address="ngModel"  type="text" [(ngModel)]="model.address" placeholder="you@domain.com" required ></textarea>
+        <select #nationality="ngModel" id="nationality" name="nationality" [(ngModel)]="model.country" required>
+            <option *ngFor="let nationality of nationalities" [ngValue]="nationality.code">{{nationality.name}}</option>
+        </select>
+        <button
+            type="submit"
+            [disabled] = "regForm.invalid">Submit</button>
+        <button click="resetForm()">Reset</button>
+    </form>
+</div>
